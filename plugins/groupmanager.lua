@@ -56,7 +56,7 @@ do
       local receiver = get_receiver(msg)
 
       -- create a group
-      if matches[1] == 'mkgroup' and matches[2] and is_admin(msg) then
+      if matches[1] == 'mkgroup' and matches[2] then
         create_group_chat (msg.from.print_name, matches[2], ok_cb, false)
 	      return 'Group '..string.gsub(matches[2], '_', ' ')..' has been created.'
       -- add a group to be moderated
@@ -137,38 +137,38 @@ do
           if matches[2] == 'lock' then
             if matches[3] == 'bot' and is_mod(msg) then
 	            if settings.lock_bots == 'yes' then
-                return 'Group is already locked from bots.'
+                return 'ادد شدن بات در گروه از قبل قفل شده بود'
 	            else
                 settings.lock_bots = 'yes'
                 save_data(_config.moderation.data, data)
-                return 'Group is locked from bots.'
+                return 'دیگر کسی قادر به ادد کردن بات به گروه نخواهد بود'
 	            end
             elseif matches[3] == 'name' and is_mod(msg) then
 	            if settings.lock_name == 'yes' then
-                return 'Group name is already locked'
+                return 'نام گروه از قبل قفل شده بود'
 	            else
                 settings.lock_name = 'yes'
                 save_data(_config.moderation.data, data)
                 settings.set_name = string.gsub(msg.to.print_name, '_', ' ')
                 save_data(_config.moderation.data, data)
-	              return 'Group name has been locked'
+	              return نام گروه قفل شد'
 	            end
             elseif matches[3] == 'member' and is_mod(msg) then
 	            if settings.lock_member == 'yes' then
-                return 'Group members are already locked'
+                return 'ممبر گیری از قبل قفل شده بود '
 	            else
                 settings.lock_member = 'yes'
                 save_data(_config.moderation.data, data)
 	            end
-	            return 'Group members has been locked'
+	            return 'از این پس ممبر گیری قفل شد'
             elseif matches[3] == 'photo' and is_mod(msg) then
 	            if settings.lock_photo == 'yes' then
-                return 'Group photo is already locked'
+                return 'عکس گروه از قبل قفل شده'
 	            else
                 settings.set_photo = 'waiting'
                 save_data(_config.moderation.data, data)
 	            end
-              return 'Please send me the group photo now'
+              return 'لطفا عکس مورد نظرتو همین الان بفرست.'
             end
           -- unlock {bot|name|member|photo|sticker}
 		      elseif matches[2] == 'unlock' then
@@ -182,27 +182,27 @@ do
 	            end
             elseif matches[3] == 'name' and is_mod(msg) then
 	            if settings.lock_name == 'no' then
-                return 'Group name is already unlocked'
+                return 'نام گروه از قبل قفل شده بود '
 	            else
                 settings.lock_name = 'no'
                 save_data(_config.moderation.data, data)
-                return 'Group name has been unlocked'
+                return 'نام گروه از این پس قابل تغییر اعضا خواهد بود''
 	            end
             elseif matches[3] == 'member' and is_mod(msg) then
 	            if settings.lock_member == 'no' then
-                return 'Group members are not locked'
+                return 'ممبر پذیری قفل نشده '
 	            else
                 settings.lock_member = 'no'
                 save_data(_config.moderation.data, data)
-                return 'Group members has been unlocked'
+                return 'ممبر پذیری گروه بسته شد'
 	            end
             elseif matches[3] == 'photo' and is_mod(msg) then
 	            if settings.lock_photo == 'no' then
-                return 'Group photo is not locked'
+                return 'عکسی گروه بسته نیست'
 	            else
                 settings.lock_photo = 'no'
                 save_data(_config.moderation.data, data)
-                return 'Group photo has been unlocked'
+                return 'عکس گروه قفل شد'
 	            end
             end
           -- view group settings
