@@ -56,7 +56,7 @@ do
       local receiver = get_receiver(msg)
 
       -- create a group
-      if matches[1] == 'mkgroup' and matches[2] then
+      if matches[1] == 'sakhtgp' and matches[2] then
         create_group_chat (msg.from.print_name, matches[2], ok_cb, false)
 	      return 'Group '..string.gsub(matches[2], '_', ' ')..' has been created.'
       -- add a group to be moderated
